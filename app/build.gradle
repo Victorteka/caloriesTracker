@@ -1,0 +1,83 @@
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-kapt'
+    id 'androidx.navigation.safeargs'
+    id 'kotlin-android-extensions'
+}
+
+android {
+    compileSdk 30
+
+    defaultConfig {
+        applicationId "com.victorteka.caloriestracker"
+        minSdk 21
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    //    Get API key and App ID from gradle.properties file
+    buildTypes.each {
+        it.buildConfigField 'String', 'NUTRITIONIX_APP_ID', NUTRITIONIX_APP_ID
+        it.buildConfigField 'String', 'NUTRITIONIX_API_KEY', NUTRITIONIX_API_KEY
+    }
+
+    buildFeatures {
+        viewBinding = true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    //Modules
+    implementation project(BuildModules.domainModule)
+    implementation project(BuildModules.coreModule)
+    implementation project(BuildModules.dataModule)
+
+    //core ktx
+    implementation(Libraries.coreKtx)
+    //appCompat
+    implementation(Libraries.appCompat)
+    //Material
+    implementation(Libraries.material)
+
+    //Constraint layout
+    implementation(Libraries.constraintLayout)
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
+    implementation 'com.google.android.material:material:1.4.0'
+
+    testImplementation(TestingLibraries.jUnit)
+    androidTestImplementation(TestingLibraries.androidXJUnit)
+    androidTestImplementation(TestingLibraries.espresso)
+
+    //Hilt
+    implementation(Libraries.hilt)
+    kapt(Libraries.hiltCompiler)
+
+    // Navigation
+    implementation(Libraries.navigation)
+    implementation(Libraries.androidNav)
+
+    //Glide
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+}
