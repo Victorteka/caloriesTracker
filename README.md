@@ -3,7 +3,6 @@
 
 ## Tech-stack
 
-* Tech-stack
     * [Kotlin](https://kotlinlang.org/) - a cross-platform, statically typed, general-purpose programming language with type inference.
     * [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) - perform background operations.
     * [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html) - handle the stream of data asynchronously that executes sequentially.
